@@ -624,6 +624,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"audiomotion-analyzer@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "audiomotion-analyzer@npm:4.5.0"
+  checksum: 10c0/300c982f41095fc47455cc334bb7c5adac71945f9a858c77dad171d0fec20d3900f93c2a4e2030be4de77acb41fcc868b2644e49107acb6b695037f8f0dd9ef0
+  languageName: node
+  linkType: hard
+
 "available-typed-arrays@npm:^1.0.7":
   version: 1.0.7
   resolution: "available-typed-arrays@npm:1.0.7"
@@ -3956,6 +3963,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "webcam-test-app@workspace:."
   dependencies:
+    audiomotion-analyzer: "npm:^4.5.0"
     chart.js: "npm:^4.4.4"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.6"

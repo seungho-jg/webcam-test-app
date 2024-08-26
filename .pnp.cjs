@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["audiomotion-analyzer", "npm:4.5.0"],\
           ["chart.js", "npm:4.4.4"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:41a6540a4603d86f6954767acc652d55cc5b339a262f9aa80b0207cb470aa543b81e06d5f36c34779a4ad7811dde87adb384c16181b52781b1d5aea0605ae122#npm:14.2.6"],\
@@ -806,6 +807,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/ast-types-flow-npm-0.0.8-d5c457c18e-10c0.zip/node_modules/ast-types-flow/",\
         "packageDependencies": [\
           ["ast-types-flow", "npm:0.0.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["audiomotion-analyzer", [\
+      ["npm:4.5.0", {\
+        "packageLocation": "../../.yarn/berry/cache/audiomotion-analyzer-npm-4.5.0-3fc54f6130-10c0.zip/node_modules/audiomotion-analyzer/",\
+        "packageDependencies": [\
+          ["audiomotion-analyzer", "npm:4.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4708,6 +4718,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["webcam-test-app", "workspace:."],\
+          ["audiomotion-analyzer", "npm:4.5.0"],\
           ["chart.js", "npm:4.4.4"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:41a6540a4603d86f6954767acc652d55cc5b339a262f9aa80b0207cb470aa543b81e06d5f36c34779a4ad7811dde87adb384c16181b52781b1d5aea0605ae122#npm:14.2.6"],\
