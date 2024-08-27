@@ -51,7 +51,7 @@ const WebcamTest = () => {
     media.start();
 
     timerIntervalRef.current = setInterval(() => {
-        setTimer(prevTimer => prevTimer + 1);
+      setTimer(prevTimer => prevTimer + 1);
     }, 1000);
   };
 
@@ -74,50 +74,78 @@ const WebcamTest = () => {
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
     return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  }
-  const handleDownload = () => {
-    if (recordedChunks.length === 0) return;
+  };
 
-    const blob = new Blob(recordedChunks, { type: 'video/webm' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.style = 'display: none';
-    a.href = url;
-    a.download = 'recorded-video.webm';
-    a.click();
-    window.URL.revokeObjectURL(url);
+  const handleBack = () => {
+    setPreviewUrl(null);
+    setRecordedChunks([]);
+    setTimer(0);
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="mb-4">
-        <video ref={videoRef} autoPlay muted className="w-full max-w-2xl mx-auto border rounded" />
+    <div className="relative w-full h-full bg-black rounded-md">
+      <video 
+        ref={videoRef} 
+        autoPlay 
+        muted 
+        className="w-full h-full object-cover rounded-md"
+      />
+
+      {/* Formatted Time - Top Left */}
+      <div className="absolute top-4 left-4 p-2 rounded-lg" style={{
+        backgroundColor: isRecording ? 'rgba(255, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.5)',
+        color: 'white',
+        transition: 'background-color 0.3s ease'
+      }}>
+        {formatTime(timer)}
       </div>
-      <div className="flex justify-center space-x-4">
-        {!isRecording ? (
-          <button onClick={handleStartRecording} className="bg-blue-500 text-white px-4 py-2 rounded">
-            Start Recording
-          </button>
-        ) : (
-          <button onClick={handleStopRecording} className="bg-red-500 text-white px-4 py-2 rounded">
-            Stop Recording
-          </button>
-        )}
-        {previewUrl && (
-          <button onClick={handleDownload} className="bg-green-500 text-white px-4 py-2 rounded">
-            Download Recording
-          </button>
-        )}
+
+      {/* Recording Button - Bottom Center */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        <button
+          onClick={isRecording ? handleStopRecording : handleStartRecording}
+          className={`w-16 h-16 rounded-full focus:outline-none transition-all duration-300 ${
+            isRecording 
+              ? 'bg-transparent border-4 border-white' 
+              : 'bg-red-600 border-4 border-white'
+          }`}
+        >
+          {isRecording && (
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="w-4 h-4 bg-red-600 rounded-sm"></span>
+            </span>
+          )}
+        </button>
       </div>
+
       {previewUrl && (
-        <div className="mt-4">
-          <h3 className="text-lg font-semibold mb-2">Preview:</h3>
-          <video src={previewUrl} controls className="w-full max-w-2xl mx-auto border rounded" />
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white shadow-lg p-4 rounded-lg max-w-2xl w-full">
+            <h3 className="text-lg font-semibold mb-2">Preview:</h3>
+            <video src={previewUrl} controls className="w-full rounded" />
+            <button 
+              onClick={() => {
+                const a = document.createElement('a');
+                a.href = previewUrl;
+                a.download = 'recorded-video.webm';
+                a.click();
+              }}
+              className="w-full mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+            >
+              Download Recording
+            </button>
+            <button
+              onClick={handleBack}
+              className="w-full mt-2 bg-stone-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+            >
+              Back
+            </button>
+          </div>
         </div>
       )}
     </div>
   );
-};
+}
+
 
 export default WebcamTest;
